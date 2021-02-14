@@ -10,6 +10,10 @@ You can import from either:
 
 You can configure default path for Tesseract using `setPath` function or `TESSERACT_PATH` env var.
 
+## Docs
+
+Documentation is available [here](https://doc.deno.land/https/deno.land/x/tesseract/mod.ts).
+
 ## Example
 
 ```ts
