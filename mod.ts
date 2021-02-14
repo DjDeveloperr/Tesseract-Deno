@@ -144,11 +144,13 @@ export async function recognize(
   if (!status.success) {
     const _err = await proc.stderrOutput();
     const err = decoder.decode(_err);
+    proc.close();
     throw new Error(err);
   }
 
   if (output !== "stdout" && output !== "-") return "";
   else {
+    proc.close();
     return decoder.decode(await proc.output());
   }
 }
@@ -170,8 +172,10 @@ export async function getLanguages(path?: string): Promise<string[]> {
   if (!status.success) {
     const _err = await proc.stderrOutput();
     const err = decoder.decode(_err);
+    proc.close();
     throw new Error(err);
   }
+  proc.close();
   return decoder
     .decode(await proc.output())
     .replaceAll("\r", "")
@@ -198,8 +202,10 @@ export async function getVersion(path?: string) {
   if (!status.success) {
     const _err = await proc.stderrOutput();
     const err = decoder.decode(_err);
+    proc.close();
     throw new Error(err);
   }
+  proc.close();
   return (
     decoder
       .decode(await proc.output())

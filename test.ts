@@ -1,10 +1,26 @@
-import { getLanguages, getVersion, PSM, recognize } from "./mod.ts";
+import { getLanguages, getVersion, recognize } from "./mod.ts";
+import { assertEquals } from "https://deno.land/std@0.87.0/testing/asserts.ts";
 
-const img = await Deno.readFile("C:\\Users\\dell\\Desktop\\img.png");
-const output = await recognize(img, {
-  psm: PSM.SingleUniformVerticalText,
+Deno.test({
+  name: "Get Version",
+  sanitizeResources: false,
+  async fn() {
+    assertEquals(typeof (await getVersion()), "string");
+  },
 });
 
-console.log("Output:", output.trim());
-console.log("Langs:", await getLanguages());
-console.log("Version:", await getVersion());
+Deno.test({
+  name: "Get Languages",
+  sanitizeResources: false,
+  async fn() {
+    assertEquals(typeof (await getLanguages()), "object");
+  },
+});
+
+Deno.test({
+  name: "Recognize",
+  sanitizeResources: false,
+  async fn() {
+    assertEquals((await recognize("testdata/deno.png")).trim(), "Deno");
+  },
+});
