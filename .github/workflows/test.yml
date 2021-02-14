@@ -24,7 +24,7 @@ jobs:
           deno-version: ${{ matrix.deno }}
 
       - name: Install Tesseract
-        run: apt-get install tesseract-ocr
-        
+        run: sudo apt-get install tesseract-ocr
+
       - name: Run Tests
         run: deno test --allow-run --allow-read
