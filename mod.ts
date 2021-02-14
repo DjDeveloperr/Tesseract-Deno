@@ -1,5 +1,11 @@
+let envPath: string | undefined;
+
+try {
+  envPath = Deno.env.get("TESSERACT_PATH");
+} catch (e) {}
+
 /** Default path for Tesseract Binary */
-export let TESSERACT_PATH = "tesseract";
+export let TESSERACT_PATH = envPath ?? "tesseract";
 
 /** OCR Engine Mode */
 export enum OEM {
