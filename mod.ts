@@ -99,7 +99,7 @@ export async function recognize(
   if (typeof options.psm === "number") {
     if (options.psm < 0 || options.psm > 13)
       throw new Error(`Invalid PSM: ${options.psm}. Must be between 0-13`);
-    args.push(`--psm ${options.psm}`);
+    args.push(`--psm`, options.psm.toString());
   }
   if (typeof options.oem === "number") {
     if (options.oem < 0 || options.oem > 3)
