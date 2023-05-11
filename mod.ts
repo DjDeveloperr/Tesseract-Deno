@@ -95,7 +95,8 @@ export async function recognize(
   args.push(options.output ?? "stdout");
 
   if (typeof options.lang === "string") {
-    args.push(`-l="${options.lang.replaceAll('"', '\\"')}"`);
+    args.push("-l");
+    args.push(`${options.lang.replaceAll('"', '\\"')}`);
   }
   if (typeof options.tessdata === "string") {
     args.push(`--tessdata-dir="${options.tessdata.replaceAll('"', '\\"')}"`);
