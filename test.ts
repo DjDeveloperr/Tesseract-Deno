@@ -24,3 +24,14 @@ Deno.test({
     assertEquals((await recognize("testdata/deno.png")).trim(), "Deno");
   },
 });
+
+Deno.test({
+  name: "Recognize with language options",
+  sanitizeResources: false,
+  async fn() {
+    assertEquals(
+      (await recognize("testdata/deno.png", { lang: "eng" })).trim(),
+      "Deno",
+    );
+  },
+});
