@@ -77,45 +77,53 @@ const encoder = new TextEncoder();
  */
 export async function recognize(
   file: string | Uint8Array,
-  options: TesseractOptions = {}
+  options: TesseractOptions = {},
 ): Promise<string> {
   if (options === undefined) options = {};
-  if (typeof file !== "string" && !(file instanceof Uint8Array))
+  if (typeof file !== "string" && !(file instanceof Uint8Array)) {
     throw new Error("File must be string (path) or Uint8Array");
+  }
   if (typeof options !== "object") throw new Error("Options must be object");
 
   const args: string[] = [options.path ?? TESSERACT_PATH];
-  const input =
-    typeof file === "string" && options.stdin !== true ? file : "stdin";
+  const input = typeof file === "string" && options.stdin !== true
+    ? file
+    : "stdin";
   args.push(input);
 
   const output = options.output ?? "stdout";
   args.push(options.output ?? "stdout");
 
-  if (typeof options.lang === "string")
+  if (typeof options.lang === "string") {
     args.push(`-l="${options.lang.replaceAll('"', '\\"')}"`);
-  if (typeof options.tessdata === "string")
+  }
+  if (typeof options.tessdata === "string") {
     args.push(`--tessdata-dir="${options.tessdata.replaceAll('"', '\\"')}"`);
+  }
   if (typeof options.psm === "number") {
-    if (options.psm < 0 || options.psm > 13)
+    if (options.psm < 0 || options.psm > 13) {
       throw new Error(`Invalid PSM: ${options.psm}. Must be between 0-13`);
+    }
     args.push(`--psm`, options.psm.toString());
   }
   if (typeof options.oem === "number") {
-    if (options.oem < 0 || options.oem > 3)
+    if (options.oem < 0 || options.oem > 3) {
       throw new Error(`Invalid OEM: ${options.oem}. Must be between 0-3`);
+    }
     args.push(`--oem ${options.oem}`);
   }
   if (typeof options.dpi === "number") args.push(`--dpi ${options.dpi}`);
-  if (typeof options.words === "string")
+  if (typeof options.words === "string") {
     args.push(`--user-words="${options.words.replaceAll('"', '\\"')}"`);
-  if (typeof options.patterns === "string")
+  }
+  if (typeof options.patterns === "string") {
     args.push(`--user-patterns="${options.patterns.replaceAll('"', '\\"')}"`);
+  }
 
   if (typeof options.flags === "object") {
     for (const [k, v] of Object.entries(options.flags)) {
       args.push(
-        `-${k.length > 1 ? "-" : ""}${k}="${v.replaceAll('"', '\\"')}"`
+        `-${k.length > 1 ? "-" : ""}${k}="${v.replaceAll('"', '\\"')}"`,
       );
     }
   }
@@ -135,7 +143,7 @@ export async function recognize(
 
   if (input === "stdin" || input === "-") {
     await proc.stdin?.write(
-      typeof file === "object" ? file : encoder.encode(file)
+      typeof file === "object" ? file : encoder.encode(file),
     );
     await proc.stdin.close();
   }
