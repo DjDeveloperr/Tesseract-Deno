@@ -5,14 +5,18 @@ Deno wrapper for Tesseract OCR Engine CLI.
 ## Usage
 
 You can import from either:
-- Main: https://raw.githubusercontent.com/DjDeveloperr/Tesseract-Deno/main/mod.ts
+
+- Main:
+  https://raw.githubusercontent.com/DjDeveloperr/Tesseract-Deno/main/mod.ts
 - Stable: https://deno.land/x/tesseract/mod.ts
 
-You can configure default path for Tesseract using `setPath` function or `TESSERACT_PATH` env var.
+You can configure default path for Tesseract using `setPath` function or
+`TESSERACT_PATH` env var.
 
 ## Docs
 
-Documentation is available [here](https://doc.deno.land/https/deno.land/x/tesseract/mod.ts).
+Documentation is available
+[here](https://doc.deno.land/https/deno.land/x/tesseract/mod.ts).
 
 ## Example
 

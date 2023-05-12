@@ -30,7 +30,12 @@ Deno.test({
   sanitizeResources: false,
   async fn() {
     assertEquals(
-      (await recognize("testdata/deno.png", { lang: "eng" })).trim(),
+      (await recognize("testdata/deno.png", {
+        lang: "eng",
+        config: {
+          preserve_interword_spaces: "1",
+        },
+      })).trim(),
       "Deno",
     );
   },
