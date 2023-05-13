@@ -131,7 +131,8 @@ export async function recognize(
 
   if (typeof options.config === "object") {
     for (const [k, v] of Object.entries(options.config)) {
-      args.push(`-c ${k}=${v}`);
+      args.push("-c");
+      args.push(`${k}=${v}`);
     }
   }
 
